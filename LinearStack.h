@@ -2,9 +2,9 @@
 // Created by robert on 10/18/16.
 //
 
-typedef int stackType;
+typedef char stackType;
 
-const int stackSize=50;
+const char stackSize=50;
 
 class linearStack{
 

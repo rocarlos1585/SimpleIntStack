@@ -4,31 +4,43 @@ using std::cin;
 using std::endl;
 
 #include "LinearStack.h"
-typedef int stackType;
+typedef char stackType;
+
+#include <string.h>
+using std::getline;
+using std::string;
+
 
 int main() {
 
-    linearStack stack;
-    stackType x;
-    const stackType key = -1;
+    linearStack objCharPal;
 
-    cout<<"insert a element to the stack (finish with -1)"<<endl;
+    stackType charStack;
+    bool isPalindrome;
+    string palindrome;
 
-    try {
-        do{
-            cin>>x;                                                                 //lee el numero que incerte el usuario
-            stack.push(x);                                                          //manda el numero insertado al metodo push
-        }while(x!=key);                                                             //y hace tod0 esto siempre y cuando el numero insertado sea diferente a key (-1)
-
-        //proceso de la pila
-        cout<<"elements of the stack: ";
-        while(!stack.emptyStack()){                                                 //mientras stack.emptystack() no se cumpla hara lo siguiente
-            x = stack.pop();                                                        //x sera igual a lo que hay en la funcion pop()
-            cout<< x <<" "<<endl;                                                   //aqui imprimira valor por valor de lo que mande pop usando a x como su medio para enviar los numeros
-        }
+    cout<<"insert a phrase"<<endl;
+        getline(cin, palindrome);
+    for(int i=0; i<palindrome.length();){
+        char c;
+        c=palindrome[i++];
+        objCharPal.push(c);
     }
-    catch (const char *error){                                                      //aqui habra una excepcion en dado caso que el try haya fallado
-        cout<<"Exception; "<<error;
+
+    //en esta parte compruebo si la palabra ingresada es un palindromo
+    isPalindrome=true;
+    for(int j=0; isPalindrome&&!objCharPal.emptyStack();){
+        char c;
+        c=objCharPal.pop();
+        isPalindrome=palindrome[j++]==c;
+    }
+
+    objCharPal.clearStack();
+    if(isPalindrome){
+        cout<<"the phrase: '"<<palindrome<<"' is a palindrome"<<endl;
+    }
+    else{
+        cout<<"the phrase: '"<<palindrome<<"' not is a palindrome"<<endl;
     }
     return 0;
 }
