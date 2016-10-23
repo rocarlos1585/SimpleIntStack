@@ -2,7 +2,7 @@
 // Created by robert on 10/18/16.
 //
 
-typedef char stackType;
+typedef double stackType;
 
 const char stackSize=50;
 

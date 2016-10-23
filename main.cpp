@@ -4,7 +4,7 @@ using std::cin;
 using std::endl;
 
 #include "LinearStack.h"
-typedef char stackType;
+typedef double stackType;
 
 #include <string.h>
 using std::getline;
@@ -13,46 +13,47 @@ using std::string;
 
 int main() {
 
-    linearStack objCharPal;
+    linearStack objDoubleStack;                                 //creo un objeto de tipo linearStack();
+    
+    int elementsNumber;
+    double element;
 
-    stackType charStack;
-    bool isPalindrome;
-    string palindrome;
 
-    cout<<"insert a phrase"<<endl;
-        getline(cin, palindrome);
-    for(int i=0; i<palindrome.length();){
-        char c;
-        c=palindrome[i++];
-        objCharPal.push(c);
+    cout<<"How many elements do you want in the stack"<<endl;
+        cin>>elementsNumber;                                    //leo el numero de elementos que el usuario quiere para esta pila
+
+
+    for(int i=0; i<elementsNumber;i++){                         //inicio un for para llenar la pila el numero de veces que pidio el usuario
+        cin>>element;                                           //leo el dato en el ciclo que esta corriendo
+        objDoubleStack.push(element);                           //ese mismo dato lo mando al metodo push
     }
 
-    //en esta parte compruebo si la palabra ingresada es un palindromo
-    isPalindrome=true;
-    for(int j=0; isPalindrome&&!objCharPal.emptyStack();){
-        char c;
-        c=objCharPal.pop();
-        isPalindrome=palindrome[j++]==c;
-    }
+    //en esta parte se empieza a vaciar la pila
+    cout<<"Elements Of The Stack"<<endl;
 
-    objCharPal.clearStack();
-    if(isPalindrome){
-        cout<<"the phrase: '"<<palindrome<<"' is a palindrome"<<endl;
-    }
-    else{
-        cout<<"the phrase: '"<<palindrome<<"' not is a palindrome"<<endl;
+    while(!objDoubleStack.emptyStack()){                        //mientras el metodo emptyStack se distinto a true(que es lo que deve enviar) ejecutara lo siguiente
+
+        element=objDoubleStack.pop();                           //la variable element va a tomar el valor de el metodo pop en cada ciclo que se ejecute el while
+
+        if(element>0.0){                                        //si lo que hay en la variable element es un numero mayor a 0.0 osea positivo hara lo siguiente
+            cout<<"Positive Element: ["<<element<<"] "<<endl;
+        }
+
+        else{                                                   //si no es mayor a 0.0 pues por logica el numero es negativo y hara lo siguiente
+            cout<<"Negative Element: ["<<element<<"] "<<endl;
+        }
     }
     return 0;
 }
 
-void linearStack::push(stackType x){                                                //aqui el metodo esta solicitan a la variable x que corresponde al numero que ingreso el usuario
+void linearStack::push(stackType element){                                                //aqui el metodo esta solicitan a la variable x que corresponde al numero que ingreso el usuario
     if(fullStack()){                                                                //si la funcion fullStack se cumple mostrara un error de que la pila esta desbordada
         throw "stack overflow";
     }
 
     //se incrementa el puntero que indica la cima de la pila en mi caso se llama top
     top++;                                                                          // si no se cumple la condicion anterior aumentara el apuntador del final de la lista para que la pila agrege un espacion de maner dinamica
-    stackList[top]=x;                                                               //entonces en la lista en su indice [top] va a ser igual lo que hay en x que es el numero que el usuario ingreso
+    stackList[top]=element;                                                               //entonces en la lista en su indice [top] va a ser igual lo que hay en x que es el numero que el usuario ingreso
 }
 
 stackType linearStack::pop(){
